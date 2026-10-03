@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.List;
+import jakarta.persistence.FetchType;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @Entity
 @Table(name = "agence")
@@ -29,4 +32,7 @@ public class Agence {
 
     @Column(nullable = false, length = 20)
     private String telephone;
+
+    @OneToMany(mappedBy = "agence", fetch = FetchType.EAGER)
+    private List<Vehicule> vehicules;
 }
