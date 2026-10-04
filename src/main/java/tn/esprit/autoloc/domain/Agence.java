@@ -35,4 +35,7 @@ public class Agence {
 
     @OneToMany(mappedBy = "agence", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Vehicule> vehicules;
+
+    @OneToMany(mappedBy = "agence", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Employe> employes;
 }

@@ -39,4 +39,7 @@ public class Vehicule {
     @ManyToOne(optional = true)
     @JoinColumn(name = "id_agence", nullable = true)
     private Agence agence;
+
+    @OneToMany(mappedBy = "vehicule", cascade = CascadeType.ALL)
+    private java.util.List<Reservation> reservations;
 }
