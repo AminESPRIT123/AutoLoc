@@ -30,6 +30,7 @@ public class Contrat {
     @Column(nullable = false)
     private boolean valide;
 
-    @OneToOne(mappedBy = "contrat")
+    @OneToOne
+    @JoinColumn(name= "id_reservation")
     private Reservation reservation;
 }

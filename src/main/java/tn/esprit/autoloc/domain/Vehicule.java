@@ -5,6 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.math.BigDecimal;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn;
+import java.util.List;
 @Entity
 @Table(name = "vehicule")
 @Getter
@@ -42,4 +46,12 @@ public class Vehicule {
 
     @OneToMany(mappedBy = "vehicule", cascade = CascadeType.ALL)
     private java.util.List<Reservation> reservations;
+
+    @ManyToMany
+    @JoinTable(
+            name = "vehicule_equipement",
+            joinColumns = @JoinColumn(name = "id_vehicule"),
+            inverseJoinColumns = @JoinColumn(name = "id_equipement")
+    )
+    private List<Equipement> equipements;
 }
