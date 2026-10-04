@@ -33,6 +33,6 @@ public class Agence {
     @Column(nullable = false, length = 20)
     private String telephone;
 
-    @OneToMany(mappedBy = "agence", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "agence", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Vehicule> vehicules;
 }

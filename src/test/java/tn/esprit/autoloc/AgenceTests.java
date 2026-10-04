@@ -11,6 +11,7 @@ import tn.esprit.autoloc.domain.Vehicule;
 import tn.esprit.autoloc.domain.CategorieVehicule;
 import tn.esprit.autoloc.domain.StatutVehicule;
 import tn.esprit.autoloc.repository.AgenceRepository;
+import org.junit.jupiter.api.Assertions;
 
 
 
@@ -66,7 +67,46 @@ public class AgenceTests {
         agence.setVehicules(List.of(vehicule1, vehicule2));
         agenceRepository.save(agence);
     }
+
     @Test
     void loadAgence() {
+
+        Iterable<Agence> agences = agenceRepository.findAll();
+
+        //StringBuilder pour construire une chaîne contenant les informations demandées
+        StringBuilder sb = new StringBuilder();
+
+        for (Agence agence : agences) {
+
+            sb.append("ID Agence : ")
+                    .append(agence.getIdAgence())
+                    .append("\n");
+
+            sb.append("Nom Agence : ")
+                    .append(agence.getNom())
+                    .append("\n");
+
+            sb.append("Nombre de véhicules : ")
+                    .append(agence.getVehicules().size())
+                    .append("\n");
+
+            for (Vehicule vehicule : agence.getVehicules()) {
+
+                sb.append("  ID Véhicule : ")
+                        .append(vehicule.getIdVehicule())
+                        .append("\n");
+
+                sb.append("  Immatriculation : ")
+                        .append(vehicule.getImmatriculation())
+                        .append("\n");
+            }
+
+            sb.append("-------------------------\n");
+        }
+
+        //fait toujours échouer le test et utilise le contenu de sb comme message d'erreur.
+        Assertions.fail(sb.toString());
+
+        System.out.println(sb);
     }
 }
