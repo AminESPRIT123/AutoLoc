@@ -1,5 +1,6 @@
 package tn.esprit.autoloc.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "contrat")
@@ -30,7 +32,11 @@ public class Contrat {
     @Column(nullable = false)
     private boolean valide;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "id_reservation")
+    @JsonBackReference("reservation-contrat")
     private Reservation reservation;
+
+    @OneToMany(mappedBy = "contrat", cascade = CascadeType.PERSIST , orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<Paiement> paiements;
 }
